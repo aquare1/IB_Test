@@ -75,23 +75,26 @@ public class PersonService {
 
     public ResultDTO login(){
         try{
-            //用户验证
-            final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("admin", "adnin123"));
+
+            final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("admin", "admin123"));
             UserDetail userDetail = (UserDetail)authentication.getPrincipal();
-            //存储认证信息
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            //存储token
+
             final String token = jwtTokenUtil.generateAccessToken(userDetail);
+            System.out.println("token: "+token);
             jwtTokenUtil.putToken(userDetail.getUsername(), token);
             userDetail.setPassword("");
-            return ResultDTO.success(new ResponseUserToken(token, userDetail));
+            return ResultDTO.success(new ResponseUserToken(token));
         } catch (DisabledException | BadCredentialsException e) {
-            return  ResultDTO.failure();
+            return  ResultDTO.failure(e);
         }
     }
 
 
-    public ResultDTO logout(){
+    public ResultDTO logout(String token){
+        String userName = jwtTokenUtil.getUsernameFromToken(token);
+        jwtTokenUtil.deleteToken(userName);
         return ResultDTO.success();
     }
 }

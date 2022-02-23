@@ -333,7 +333,7 @@ public interface BaseDao<Entity extends BaseEntity> {
         }
 
         public String save(final Entity entity) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-            //entity.setLastUpdate(new Date());
+
             String sql = new SQL() {{
                 if (entity != null) {
                     if (entity.getId() != null) {
@@ -347,6 +347,7 @@ public interface BaseDao<Entity extends BaseEntity> {
                         WHERE("id=#{id}");
                     } else {
                         entity.setId(IdUtils.getNextId());
+                        System.out.println("id: "+entity.getId());
                         INSERT_INTO(String.valueOf(entity.getClass().getMethod("getMapTabel", null).invoke(entity)));
                         for (Field field : entity.getClass().getDeclaredFields()) {
                             field.setAccessible(true);

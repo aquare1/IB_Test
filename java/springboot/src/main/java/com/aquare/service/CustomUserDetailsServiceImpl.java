@@ -5,6 +5,7 @@ import com.aquare.domain.UserDetail;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,10 +18,10 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetail loadUserByUsername(String username) throws UsernameNotFoundException {
-
-
 		UserDetail userDetail = new UserDetail();
-
+		userDetail.setUsername(username);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		userDetail.setPassword(encoder.encode("admin123"));
 
 		return userDetail;
 	}

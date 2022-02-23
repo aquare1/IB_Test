@@ -18,6 +18,6 @@ public class AdressEntity implements BaseEntity {
 
     @Override
     public String getMapTabel() {
-        return "adress";
+        return "t_adress";
     }
 }

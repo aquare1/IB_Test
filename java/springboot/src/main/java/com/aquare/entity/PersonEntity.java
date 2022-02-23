@@ -18,6 +18,6 @@ public class PersonEntity implements BaseEntity {
 
     @Override
     public String getMapTabel() {
-        return "person";
+        return "t_person";
     }
 }

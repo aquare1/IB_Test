@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping(value = "/v1")
 public class PersonController {
@@ -42,7 +44,11 @@ public class PersonController {
 
     @ApiOperation(value = "logout", notes="logout")
     @GetMapping(value = "/logout" , produces = { "application/json; charset=UTF-8" })
-    ResultDTO logout( ){
-        return personService.logout();
+    ResultDTO logout( HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        if (token != null) {
+            return personService.logout(token);
+        }
+        return ResultDTO.failure();
     }
 }

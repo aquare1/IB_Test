@@ -18,6 +18,6 @@ public class ClubEntity implements BaseEntity {
 
     @Override
     public String getMapTabel() {
-        return "club";
+        return "t_club";
     }
 }
