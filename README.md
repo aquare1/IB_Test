@@ -28,3 +28,8 @@ at this time
 o Classes should have proper test coverage. 
 • Swagger
 o Swagger documentation for endpoints is preferred.
+
+code path:         ./java/springboot
+run command:   mvn spring-boot:run
+test command:   mvn clean test org.jacoco:jacoco-maven-plugin:0.8.3:prepare-agent install -Dmaven.test.failure.ignore=true
+test report :       ./java/springboot/target/site/jacoco/index.html
