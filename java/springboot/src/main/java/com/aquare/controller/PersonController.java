@@ -18,8 +18,8 @@ public class PersonController {
 
     @ApiOperation(value = "post-person", notes="post-person")
     @PostMapping(value = "/post-person" , produces = { "application/json; charset=UTF-8" })
-    public ResultDTO postPerson(@RequestBody PersonEntity person ){
-        return personService.save(person);
+    public ResultDTO postPerson(@RequestParam(value = "personName",required = true) String personName ){
+        return personService.save(personName);
     }
 
     @ApiOperation(value = "get-person", notes="get-person")

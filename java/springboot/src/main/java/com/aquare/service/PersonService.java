@@ -53,8 +53,10 @@ public class PersonService {
         }
     }
 
-    public ResultDTO save(PersonEntity person){
+    public ResultDTO save(String personName){
         try {
+            PersonEntity person = new PersonEntity();
+            person.setName(personName);
             personDao.save(person);
             return ResultDTO.success(person);
         }catch (Exception e){
