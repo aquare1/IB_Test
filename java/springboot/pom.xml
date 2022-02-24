@@ -73,7 +73,7 @@
       <artifactId>mybatis-plus-boot-starter</artifactId>
       <version>3.1.0</version>
     </dependency>
-    <!-- 增加对PageHelper的支持 -->
+    <!-- PageHelper -->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
