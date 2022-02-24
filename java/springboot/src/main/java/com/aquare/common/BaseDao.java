@@ -115,7 +115,7 @@ public interface BaseDao<Entity extends BaseEntity> {
                     FROM(String.valueOf(entity.getClass().getMethod("getMapTabel", null).invoke(entity)));
                     for (Field field : entity.getClass().getDeclaredFields()) {
                         field.setAccessible(true);
-                        if (field.get(entity) != null && !String.valueOf(field.get(entity)).isEmpty()) {
+                        if (field.get(entity) != null && !String.valueOf(field.get(entity)).isEmpty() && !"$jacocoData".equals(field.getName())) {
                             WHERE(camel4underline(field.getName())  + " = #{" + field.getName() + "}");
                         }
                     }
@@ -134,8 +134,11 @@ public interface BaseDao<Entity extends BaseEntity> {
                     FROM(String.valueOf(entity.getClass().getMethod("getMapTabel", null).invoke(entity)));
                     for (Field field : entity.getClass().getDeclaredFields()) {
                         field.setAccessible(true);
-                        SELECT(camel4underline(field.getName()) );
-                        if (field.get(entity) != null && !String.valueOf(field.get(entity)).isEmpty()) {
+                        if(!"$jacocoData".equals(field.getName())){
+                            SELECT(camel4underline(field.getName()) );
+                        }
+
+                        if (field.get(entity) != null && !String.valueOf(field.get(entity)).isEmpty() && !"$jacocoData".equals(field.getName())) {
                             WHERE(camel4underline(field.getName()) + " = #{" + field.getName() + "}");
                         }
                     }
@@ -295,7 +298,7 @@ public interface BaseDao<Entity extends BaseEntity> {
                     for (Field field : entity.getClass().getDeclaredFields()) {
                         field.setAccessible(true);
                         SELECT_DISTINCT(camel4underline(field.getName()));
-                        if (field.get(entity) != null && !String.valueOf(field.get(entity)).isEmpty()) {
+                        if (field.get(entity) != null && !String.valueOf(field.get(entity)).isEmpty() && !"$jacocoData".equals(field.getName())) {
                             WHERE("LOCATE(#{" + field.getName() + "}, " + camel4underline(field.getName()) + ")>0");
                         }
                     }
@@ -340,7 +343,7 @@ public interface BaseDao<Entity extends BaseEntity> {
                         UPDATE(String.valueOf(entity.getClass().getMethod("getMapTabel", null).invoke(entity)));
                         for (Field field : entity.getClass().getDeclaredFields()) {
                             field.setAccessible(true);
-                            if (field.get(entity) != null && !"id".equals(field.getName())) {
+                            if (field.get(entity) != null && !"id".equals(field.getName()) && !"$jacocoData".equals(field.getName())) {
                                 SET(camel4underline(field.getName()) + " = #{" + field.getName() + "}");
                             }
                         }
@@ -351,10 +354,10 @@ public interface BaseDao<Entity extends BaseEntity> {
                         INSERT_INTO(String.valueOf(entity.getClass().getMethod("getMapTabel", null).invoke(entity)));
                         for (Field field : entity.getClass().getDeclaredFields()) {
                             field.setAccessible(true);
-                            if (field.get(entity) != null ) {
+                            if (field.get(entity) != null && !"$jacocoData".equals(field.getName())) {
                                 INTO_COLUMNS(camel4underline(field.getName()));
                                 INTO_VALUES("#{" + field.getName() + "}");
-                            } else {
+                            } else if(field.get(entity) == null && !"$jacoco_data".equals(field.getName())) {
                                 INTO_COLUMNS(camel4underline(field.getName()));
                                 INTO_VALUES("null");
                             }
@@ -402,7 +405,7 @@ public interface BaseDao<Entity extends BaseEntity> {
                     int count = 0;
                     for (Field field : entity.getClass().getDeclaredFields()) {
                         field.setAccessible(true);
-                        if (field.get(entity) != null && !String.valueOf(field.get(entity)).isEmpty()) {
+                        if (field.get(entity) != null && !String.valueOf(field.get(entity)).isEmpty()  && !"$jacocoData".equals(field.getName())) {
                             WHERE("" + camel4underline(field.getName()) + " = #{" + field.getName() + "}");
                             count++;
                         }
