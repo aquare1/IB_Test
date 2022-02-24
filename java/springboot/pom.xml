@@ -22,7 +22,7 @@
         <build.profile.id>sit</build.profile.id>
       </properties>
     </profile>
-    <!-- 开发环境 -->
+
     <profile>
       <id>dev</id>
       <!-- <activation>
@@ -33,7 +33,7 @@
         <build.profile.id>dev</build.profile.id>
       </properties>
     </profile>
-    <!-- 生产环境 -->
+
     <profile>
       <id>pro</id>
 

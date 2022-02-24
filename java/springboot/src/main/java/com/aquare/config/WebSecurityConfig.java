@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -79,18 +80,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler).and()
-                // 由于使用的是JWT，我们这里不需要csrf
+                //
                 .csrf().disable()
 
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
-                // 基于token，所以不需要session
+
+                //
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/v1/get-person/**").access("#oauth2.hasScope('read')")
+                .antMatchers(HttpMethod.POST,"/v1/post-person").access("#oauth2.hasScope('write')")
+                .antMatchers(HttpMethod.DELETE,"/v1/delete-person/**").access("#oauth2.hasScope('write')")
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O o) {
                         o.setAccessDecisionManager(urlAccessDecisionManager);
-                        //o.setSecurityMetadataSource(urlPathFilterInvocationSecurityMetadataSource);
                         return o;
                     }
                 })

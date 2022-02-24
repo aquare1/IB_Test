@@ -41,7 +41,7 @@ public class PersonService {
         try {
             PersonEntity person = new PersonEntity();
             person.setId(id);
-            List<PersonEntity> configList = personDao.findAll(new PersonEntity());
+            List<PersonEntity> configList = personDao.findAll(person);
             if(configList.size() == 1){
                 return ResultDTO.success(configList.get(0));
             } else {
@@ -67,7 +67,7 @@ public class PersonService {
             PersonEntity person = new PersonEntity();
             person.setId(id);
             personDao.deleteByAll(person);
-            return ResultDTO.success(person);
+            return ResultDTO.success();
         }catch (Exception e){
             return ResultDTO.failure(e);
         }
@@ -78,23 +78,13 @@ public class PersonService {
 
             final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken("admin", "admin123"));
             UserDetail userDetail = (UserDetail)authentication.getPrincipal();
-
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
             final String token = jwtTokenUtil.generateAccessToken(userDetail);
-            System.out.println("token: "+token);
             jwtTokenUtil.putToken(userDetail.getUsername(), token);
-            userDetail.setPassword("");
             return ResultDTO.success(new ResponseUserToken(token));
         } catch (DisabledException | BadCredentialsException e) {
             return  ResultDTO.failure(e);
         }
     }
 
-
-    public ResultDTO logout(String token){
-        String userName = jwtTokenUtil.getUsernameFromToken(token);
-        jwtTokenUtil.deleteToken(userName);
-        return ResultDTO.success();
-    }
 }
