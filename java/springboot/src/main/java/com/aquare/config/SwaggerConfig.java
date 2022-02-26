@@ -28,16 +28,15 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    // 版本信息 时间戳+环境
     @Value("${time.stamp}")
     private String stamp;
 
-    private ApiInfo apiInfo() {// 创建API的基本信息，这些信息会在Swagger UI中进行显示
+    private ApiInfo apiInfo() {//
         return new ApiInfoBuilder()
-                .title(" Restfully APIs ")// API 标题
-                .description("Based on Spring boot  ")// API描述
-                // .contact("aquare@163.com")// 联系人
-                .version("4.0.0-"+stamp)// 版本号
+                .title(" Restfully APIs ")// API
+                .description("Based on Spring boot  ")// A
+                // .contact("aquare@163.com")//
+                .version("4.0.0-"+stamp)//
                 .build();
     }
 

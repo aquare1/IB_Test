@@ -18,7 +18,6 @@ import java.util.Set;
 /**
  * @author: dengtao aquare@163.com
  * createAt: 2019/4/10
- * @category 全局异常处理类
  */
 @Log4j2
 @RestControllerAdvice

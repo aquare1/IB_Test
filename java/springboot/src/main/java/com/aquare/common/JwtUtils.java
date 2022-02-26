@@ -21,7 +21,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
- *  令牌工具
  * @author: dengtao
  * createAt: 2019/4/14
  */

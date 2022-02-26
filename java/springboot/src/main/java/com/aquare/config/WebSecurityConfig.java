@@ -25,7 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * Author: dengtao aquare@163.com
  * createAt: 2018/9/14
- * @category 安全配置
+ * @category
  */
 @Log4j2
 @Configuration

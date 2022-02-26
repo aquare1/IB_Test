@@ -8,7 +8,6 @@ import lombok.extern.log4j.Log4j2;
 /**
  * @author: dengtao aquare@163.com
  * createAt: 2019/4/10
- * @category 返回通用异常结果异常类
  */
 @Log4j2
 public class CustomException extends RuntimeException{

@@ -18,9 +18,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @category 权限校验
  * 
- * @author: aquare@163.com createAt: 2019/4/14
+ * @author: aquare@163.com
+ * createAt: 2019/4/14
  */
 @Log4j2
 @Component

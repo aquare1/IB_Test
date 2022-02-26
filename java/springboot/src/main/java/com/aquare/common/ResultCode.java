@@ -14,19 +14,12 @@ public enum ResultCode {
 	FAILURE(0, "falure","falure");
 
 
-	/**
-	 * 编码
-	 */
 	private Integer code;
 
-	/**
-	 * 消息
-	 */
+
 	private String message;
 
-	/**
-	 * 国际化词条
-	 */
+
 	private String i18nKey;
 
 	ResultCode(Integer code, String message,String i18nMsg) {

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * @category token认证拦截器
+ * @category token
  * 
  * @author: aquare@163.com createAt: 2018/9/14
  */

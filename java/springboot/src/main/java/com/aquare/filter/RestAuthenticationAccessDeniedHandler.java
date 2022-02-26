@@ -17,7 +17,6 @@ import java.io.PrintWriter;
 /**
  * @author: dengtao aquare@163.com
  * createAt: 2018/9/21
- * @category 权限不足异常处理
  */
 @Log4j2
 @Component("RestAuthenticationAccessDeniedHandler")

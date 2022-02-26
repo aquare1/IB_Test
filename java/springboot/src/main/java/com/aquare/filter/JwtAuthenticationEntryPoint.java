@@ -18,7 +18,6 @@ import java.io.Serializable;
 /**
  * @author: dengtao aquare@163.com
  * createAt: 2019/4/10
- * @category 认证失败切面
  */
 @Log4j2
 @Component
