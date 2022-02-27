@@ -1,0 +1,58 @@
+﻿
+server:
+  port: 8083
+  tomcat:
+      max-http-header-size: 8192
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging.level:
+  com:
+    towngas:
+      stech:
+        springcloud:
+          dao: debug
+
+#spring.datasource.type: com.alibaba.druid.pool.DruidDataSource
+#spring.datasource.driverClassName: com.mysql.cj.jdbc.Driver
+#spring.datasource.url: jdbc:mysql://localhost:3306/ib_db?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+#spring.datasource.username: root
+#spring.datasource.password: mysql
+
+spring.datasource.type: com.alibaba.druid.pool.DruidDataSource
+spring.datasource.driverClassName: org.h2.Driver
+#spring.datasource.url: jdbc:h2:file:/data/h2test
+spring.datasource.url: jdbc:h2:mem:test
+spring.datasource.schema: classpath:db/schema.sql
+spring.datasource.data: classpath:db/data.sql
+spring.datasource.username: sa
+spring.datasource.password: sa
+spring.h2:
+  console:
+    enabled: true
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count==countSql;
+  page-size-zero: true
+  rowBoundsWithCount: true
+
+
+
+spring.application.name: SystemProvider
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 3600
+  refresh: 345600
+  tokenHead: "Bearer "
+
+time.stamp : 2020-11-1 14:12 -dev
+
+logging.path: /mylog
+logging.file: log.txt
+
